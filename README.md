@@ -2,7 +2,7 @@
 
 ## 介绍
 
-基于原系统开发的在线招聘求职系统 https://github.com/geeeeeeeek/java_job
+基于原系统开发的在线招聘求职系统
 
 ## 软件架构
 
