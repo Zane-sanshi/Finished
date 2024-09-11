@@ -1,0 +1,66 @@
+server.port: 8080
+server.servlet.context-path: /api
+
+BASE_LOCATION: D:\Finished\java_job
+
+DB_NAME: java_job
+
+springfox:
+  documentation:
+    swagger-ui:
+      enabled: true
+
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/${DB_NAME}?autoReconnect=true&useUnicode=true&characterEncoding=utf8&zeroDateTimeBehavior=CONVERT_TO_NULL&useSSL=false&serverTimezone=GMT%2B8
+    username: root
+    password: 2570578523zl
+
+    druid:
+      initial-size: 5
+      min-idle: 5
+      maxActive: 20
+      maxWait: 60000
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      web-stat-filter:
+        enabled: true
+        url-pattern: "/*"
+        exclusions: "*.js,*.gif,*.jpg,*.bmp,*.png,*.css,*.ico,/druid/*"
+      stat-view-servlet:
+        reset-enable: false
+        login-username: root
+        login-password: 123456
+        url-pattern: "/druid/*"
+        enabled: true
+  servlet:
+    multipart:
+      max-request-size: 10MB  # 上传文件总的最大值 默认10MB
+      max-file-size: 1MB #单个文件最大值 默认1MB
+      location: ${BASE_LOCATION}\server\upload\tmp # 临时上传目录
+      enabled: true
+
+
+  mvc:
+    static-path-pattern: /staticfiles/**  # 别名
+  web:
+    resources:
+      # static-locations: classpath:/static
+      static-locations: file:${BASE_LOCATION}\server\upload
+
+File:
+  uploadPath: ${BASE_LOCATION}/server/upload
+
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true

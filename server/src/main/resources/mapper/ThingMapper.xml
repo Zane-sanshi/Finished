@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gk.study.mapper.ThingMapper">
+
+
+    <select id="getList" resultType="com.gk.study.entity.Thing">
+        select * from b_thing;
+    </select>
+
+    <select id="getDetail" parameterType="map" resultType="com.gk.study.entity.Thing">
+        select b_thing.*, b_company.title as company_name
+        from b_thing
+        <if test="sort != '2'">
+            join b_company on (b_thing.company_id = b_company.id)
+        </if>
+        where b_thing.id=#{id};
+    </select>
+
+</mapper>
